@@ -1,4 +1,5 @@
 const Layout = () => import("@/layout/index.vue");
+// import { $t } from "@/plugins/i18n";
 
 export default [
   {
@@ -26,5 +27,15 @@ export default [
         component: () => import("@/layout/redirect.vue")
       }
     ]
+  },
+  {
+    path: "/empty",
+    name: "Empty",
+    component: () => import("@/views/empty/index.vue"),
+    meta: {
+      title: "pure empty",
+      showLink: false,
+      rank: 103
+    }
   }
 ] satisfies Array<RouteConfigsTable>;

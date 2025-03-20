@@ -1,9 +1,18 @@
 <script setup lang="ts">
+// import { getToken } from "@/utils/auth";
+import { useUserStoreHook } from "@/store/modules/user";
+import { computed } from "vue";
 defineOptions({
   name: "Welcome"
 });
+
+const userStore = useUserStoreHook();
+const teacherName = computed(() => userStore.username || "未知老师");
 </script>
 
 <template>
-  <h1>Pure-Admin-Thin（非国际化版本）</h1>
+  <div>
+    <!-- 展示用户名和昵称 -->
+    <h1>{{ teacherName }}老师，您好！</h1>
+  </div>
 </template>
