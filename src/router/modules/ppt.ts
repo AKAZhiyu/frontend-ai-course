@@ -17,6 +17,7 @@ export default {
       meta: {
         title: "课件生成",
         keepAlive: true,
+        // frameSrc: "http://127.0.0.1:5173/",
         frameSrc: "https://pipipi-pikachu.github.io/PPTist/",
         frameLoading: false
       }
