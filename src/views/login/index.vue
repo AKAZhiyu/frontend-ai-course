@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import Motion from "./utils/motion";
 import { useRouter } from "vue-router";
 import { message } from "@/utils/message";
 import { loginRules } from "./utils/rule";
 import { useNav } from "@/layout/hooks/useNav";
+import { operates, thirdParty } from "./utils/enums";
 import type { FormInstance } from "element-plus";
 import { useLayout } from "@/layout/hooks/useLayout";
+import { $t, transformI18n } from "@/plugins/i18n";
+import { ReImageVerify } from "@/components/ReImageVerify";
+import { useUserStoreHook } from "@/store/modules/user";
 // import { useUserStoreHook } from "@/store/modules/user";
 // import { initRouter, getTopMenu } from "@/router/utils";
 import { bg, avatar, illustration } from "./utils/static";
@@ -25,10 +30,12 @@ import { usePermissionStoreHook } from "@/store/modules/permission";
 defineOptions({
   name: "Login"
 });
+const imgCode = ref("");
 const router = useRouter();
 const loading = ref(false);
 const ruleFormRef = ref<FormInstance>();
 
+// const { t } = useI18n();
 const { initStorage } = useLayout();
 initStorage();
 
@@ -38,7 +45,8 @@ const { title } = useNav();
 
 const ruleForm = reactive({
   username: "admin",
-  password: "admin123"
+  password: "admin123",
+  verifyCode: ""
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
@@ -140,6 +148,21 @@ onBeforeUnmount(() => {
               </el-form-item>
             </Motion>
 
+            <Motion :delay="200">
+              <el-form-item prop="verifyCode">
+                <el-input
+                  v-model="ruleForm.verifyCode"
+                  clearable
+                  :placeholder="'验证码'"
+                  :prefix-icon="useRenderIcon('ri:shield-keyhole-line')"
+                >
+                  <template v-slot:append>
+                    <ReImageVerify v-model:code="imgCode" />
+                  </template>
+                </el-input>
+              </el-form-item>
+            </Motion>
+
             <Motion :delay="250">
               <el-button
                 class="w-full mt-4"
@@ -151,7 +174,46 @@ onBeforeUnmount(() => {
                 登录
               </el-button>
             </Motion>
+            <br />
+            <Motion :delay="300">
+              <el-form-item>
+                <div class="w-full h-[20px] flex justify-between items-center">
+                  <el-button
+                    v-for="(item, index) in operates"
+                    :key="index"
+                    class="w-full mt-4"
+                    size="default"
+                    @click="useUserStoreHook().SET_CURRENTPAGE(index + 1)"
+                  >
+                    {{ item.title }}
+                  </el-button>
+                </div>
+              </el-form-item>
+            </Motion>
           </el-form>
+
+          <Motion :delay="350">
+            <el-form-item>
+              <el-divider>
+                <p class="text-gray-500 text-xs">
+                  {{ "第三方登录" }}
+                </p>
+              </el-divider>
+              <div class="w-full flex justify-evenly">
+                <span
+                  v-for="(item, index) in thirdParty"
+                  :key="index"
+                  :title="item.title"
+                >
+                  <IconifyIconOnline
+                    :icon="`ri:${item.icon}-fill`"
+                    width="20"
+                    class="cursor-pointer text-gray-500 hover:text-blue-400"
+                  />
+                </span>
+              </div>
+            </el-form-item>
+          </Motion>
         </div>
       </div>
     </div>
