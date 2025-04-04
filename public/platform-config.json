@@ -1,6 +1,6 @@
 {
   "Version": "5.9.0",
-  "Title": "PureAdmin",
+  "Title": "AI课程帮",
   "FixedHeader": true,
   "HiddenSideBar": false,
   "MultiTagsCache": false,
@@ -16,7 +16,7 @@
   "Stretch": false,
   "SidebarStatus": true,
   "EpThemeColor": "#409EFF",
-  "ShowLogo": false,
+  "ShowLogo": true,
   "ShowModel": "smart",
   "MenuArrowIconNoTransition": false,
   "CachingAsyncRoutes": false,

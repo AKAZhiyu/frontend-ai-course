@@ -4,8 +4,8 @@ export default {
   path: "/chatai",
   redirect: "/chatai/index",
   meta: {
-    icon: "ri:chat-search-line",
-    title: "chat-ai",
+    icon: "ri:ai-generate-2",
+    title: "AI助教",
     rank: chatai
   },
   children: [
@@ -14,8 +14,9 @@ export default {
       name: "ChatAi",
       component: () => import("@/views/chatai/index.vue"),
       meta: {
-        title: "chat-ai"
+        title: "AI助教",
         // extraIcon: "IF-pure-iconfont-new svg"
+        frameLoading: false
       }
     }
   ]
