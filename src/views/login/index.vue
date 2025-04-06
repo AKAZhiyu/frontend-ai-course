@@ -57,6 +57,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       setToken({
         username: "admin",
         roles: ["admin"],
+        nickname: "小明",
         accessToken: "eyJhbGciOiJIUzUxMiJ9.admin"
       } as any);
       // 全部采取静态路由模式

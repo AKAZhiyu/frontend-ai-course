@@ -137,13 +137,19 @@ onMounted(() => {
       }
     }"
     :history="[
-      { text: '赵云是谁？', role: 'user' },
+      { text: '你是谁？', role: 'user' },
       {
-        text: '赵云（约168年－229年），字子龙，是三国时期蜀汉的重要将领，以其忠诚和勇敢著称。',
+        text: '我是您的AI教学助手，在教学过程中遇到什么问题，欢迎寻求我的帮助！',
         role: 'ai'
       }
     ]"
     :demo="true"
-    :connect="{ stream: true }"
+    :connect="{
+      url: 'http://127.0.0.1:8081/api/llm/chat',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+      // headers: { customName: 'customHeaderValue' },
+      // additionalBodyProps: { customBodyField: 'customBodyValue' }
+    }"
   />
 </template>
